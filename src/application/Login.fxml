@@ -55,7 +55,7 @@
                   <Font name="Serif Regular" size="17.0" />
                </font>
             </Button>
-            <Hyperlink layoutX="255.0" layoutY="414.0" prefHeight="23.0" prefWidth="135.0" text="Reset password">
+            <Hyperlink layoutX="255.0" layoutY="414.0" onAction="#clickReset" prefHeight="23.0" prefWidth="135.0" text="Reset password">
                <font>
                   <Font name="Serif Regular" size="17.0" />
                </font>
