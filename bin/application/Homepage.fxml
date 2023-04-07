@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomepageController">
+   <top>
+      <AnchorPane prefHeight="59.0" prefWidth="600.0" style="-fx-background-color: #302c9e;" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="searchBar" layoutX="14.0" layoutY="12.0" prefHeight="25.0" prefWidth="183.0" promptText="Search" />
+            <Button layoutX="405.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: #2d90d4;" text="Edit" textFill="WHITE" />
+            <Button layoutX="454.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: #2d90d4;" text="Delete" textFill="#f2f2f2" />
+            <Button layoutX="518.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: #2d90d4;" text="Compile" textFill="#f2f2f2" />
+            <Button fx:id="searchBtn" layoutX="204.0" layoutY="12.0" mnemonicParsing="false" onAction="#search" style="-fx-background-color: #4c98c9;" text="Search" textFill="#f2f2f2" />
+            <Button layoutX="339.0" layoutY="12.0" mnemonicParsing="false" onAction="#create" style="-fx-background-color: #2d90d4;" text="Create" textFill="#f2f2f2" />
+            <Button fx:id="logoutBtn" alignment="TOP_LEFT" layoutX="626.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleLogout" prefWidth="60.0" style="-fx-background-color: #B1dfe8;" text="Logout" textFill="#063970">
+               <font>
+                  <Font name="Serif Regular" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <ListView fx:id="dropDown" prefHeight="331.0" prefWidth="200.0" style="-fx-background-color: #B1dfe8;" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>

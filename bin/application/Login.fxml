@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+   <left>
+      <Pane prefHeight="492.0" prefWidth="239.0" style="-fx-background-color: #302c9e;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="161.0" fitWidth="188.0" layoutX="39.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="https://cdn-icons-png.flaticon.com/512/3907/3907471.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="59.0" layoutY="325.0" stroke="#eaeaea" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 40; -fx-font-family: Serif;" text="ezREC" wrappingWidth="149.13671875">
+               <font>
+                  <Font size="32.0" />
+               </font>
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#11faca" />
+                        <Stop color="#119c7e" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Text>
+         </children>
+      </Pane>
+   </left>
+   <center>
+      <Pane prefHeight="392.0" prefWidth="442.0" style="-fx-background-color: #B1dfe8;" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="password" layoutX="70.0" layoutY="250.0" prefHeight="37.0" prefWidth="253.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px; -fx-font-weight: bold;">
+               <font>
+                  <Font name="Serif Regular" size="19.0" />
+               </font>
+            </TextField>
+            <Text fill="#250a46" layoutX="73.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-family: Serif;" text="Default password: blank" wrappingWidth="296.478515625">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <Button fx:id="LoginBtn" layoutX="290.0" layoutY="362.0" mnemonicParsing="false" onAction="#handleLogin" style="-fx-background-color: #063970;" text="Login" textFill="WHITE">
+               <font>
+                  <Font name="Serif Regular" size="17.0" />
+               </font>
+            </Button>
+            <Hyperlink layoutX="255.0" layoutY="414.0" onAction="#clickReset" prefHeight="23.0" prefWidth="135.0" text="Reset password">
+               <font>
+                  <Font name="Serif Regular" size="17.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
