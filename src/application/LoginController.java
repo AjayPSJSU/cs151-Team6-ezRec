@@ -21,7 +21,7 @@ public class LoginController {
 	private TextField password;
 
 	public void handleLogin(ActionEvent event) throws IOException {
-
+	
 		/* 
 		 * Checks if the user entered the default password for first time login
 		 */
@@ -36,6 +36,7 @@ public class LoginController {
 		/*
 		 * This checks if the user password is the same in the database
 		 */
+
 		else if(db.checkPassword(password.getText())) {
 			Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -1,10 +1,13 @@
 package connection;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import application.Letter;
 
 public class DatabaseAPI {
 	
@@ -233,20 +236,29 @@ public class DatabaseAPI {
 		return out;
 		
 	}
-	public void setPassword(String newPassword) {
+
+	
+	public void saveForm(Letter letter) {
 		Connection dataConnection = null;
-		Statement statement = null;
+		PreparedStatement  statement = null;
 		try {
 			
 			dataConnection = ConnectDatabase.connect();
-			String deleteString = "delete from Accounts";
-			statement = dataConnection.createStatement();	
-			statement.executeUpdate(deleteString);	
-			System.out.println(deleteString);
-			String insertString = "insert into Accounts values(\"" + newPassword + "\",0)";
-			statement.executeUpdate(insertString);	
-			System.out.println(insertString);
+			String queryString = "insert into Letter(FirstName, LastName, academic, personal, program, grade, course, semester, year, date) VALUES(?,?,?,?,?,?,?,?,?,?)";
+			statement = dataConnection.prepareStatement(queryString);	
 			
+			statement.setString(1, letter.getFirstName());
+			statement.setString(2, letter.getLastName());
+			statement.setString(3, letter.getAcademic());
+			statement.setString(4, letter.getPersonal());
+			statement.setString(5, letter.getProgram());
+			statement.setString(6, letter.getGrade());
+			statement.setString(7, letter.getCourse());
+			statement.setString(8, letter.getSemester());
+			statement.setString(9, letter.getYear());
+			statement.setString(10, letter.getDate());
+			
+			statement.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -263,6 +275,40 @@ public class DatabaseAPI {
 			}
 
 		}
+	}
+
+	public void setPassword(String newPassword) {
+		Connection dataConnection = null;
+		Statement statement = null;
+		try {
+			
+			dataConnection = ConnectDatabase.connect();
+			String deleteString = "delete from Accounts";
+			statement = dataConnection.createStatement();	
+			statement.executeUpdate(deleteString);	
+			System.out.println(deleteString);
+			String insertString = "insert into Accounts values(\"" + newPassword + "\",0)";
+			statement.executeUpdate(insertString);	
+			System.out.println(insertString);
+			
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				statement.close();
+				dataConnection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
 	}
 	public boolean checkPassword(String input) {
 		String correctPw = getPassword();
@@ -299,6 +345,7 @@ public class DatabaseAPI {
 
 		}
 		return temp.size() == 0;
+
 	}
 
 }

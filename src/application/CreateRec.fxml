@@ -20,7 +20,7 @@
                   <Font name="Serif Regular" size="13.0" />
                </font>
             </Label>
-            <TextField layoutX="132.0" layoutY="17.0" promptText="First Name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="firstName" layoutX="132.0" layoutY="17.0" promptText="First Name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
             <Label layoutX="319.0" layoutY="22.0" text=" Student's Last Name" textFill="#250a46">
                <font>
                   <Font name="Serif Regular" size="13.0" />
@@ -41,7 +41,7 @@
                   <Font name="Serif Regular" size="13.0" />
                </font>
             </Label>
-            <DatePicker layoutX="95.0" layoutY="101.0" />
+            <DatePicker fx:id="date" layoutX="95.0" layoutY="101.0" />
             <Label layoutX="311.0" layoutY="106.0" text="Student's Program Name" textFill="#250a46">
                <font>
                   <Font name="Serif Regular" size="13.0" />
@@ -75,13 +75,13 @@
             </Label>
             <MenuButton fx:id="personalCharDrop" layoutX="206.0" layoutY="246.0" mnemonicParsing="false" style="-fx-background-color: #378ba8;" text="Select" textFill="WHITE" />
             <MenuButton fx:id="academicCharDrop" layoutX="206.0" layoutY="303.0" mnemonicParsing="false" style="-fx-background-color: #378ba8;" text="Select" textFill="WHITE" />
-            <TextField layoutX="445.0" layoutY="17.0" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField layoutX="445.0" layoutY="55.0" promptText="Target School" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField layoutX="440.0" layoutY="145.0" promptText="Year" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="lastName" layoutX="445.0" layoutY="17.0" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="school" layoutX="445.0" layoutY="55.0" promptText="Target School" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="year" layoutX="440.0" layoutY="145.0" promptText="Year" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
             <ChoiceBox fx:id="gender" layoutX="118.0" layoutY="56.0" prefWidth="150.0" />
             <ChoiceBox fx:id="programName" layoutX="444.0" layoutY="101.0" prefWidth="150.0" />
             <ChoiceBox fx:id="firstSemester" layoutX="145.0" layoutY="146.0" prefWidth="150.0" />
-            <Button fx:id="saveBtn" layoutX="537.0" layoutY="303.0" mnemonicParsing="false" style="-fx-background-color: #378ba8;" text="Save" textFill="WHITE">
+            <Button fx:id="saveBtn" layoutX="537.0" layoutY="303.0" mnemonicParsing="false" onAction="#save" style="-fx-background-color: #378ba8;" text="Save" textFill="WHITE">
                <font>
                   <Font name="Serif Regular" size="19.0" />
                </font>
