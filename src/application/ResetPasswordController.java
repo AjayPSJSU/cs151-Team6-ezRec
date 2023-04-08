@@ -26,14 +26,14 @@ public class ResetPasswordController {
 
 	public void handleReset(ActionEvent event) throws IOException {
 		
-		if(oldPassword.getText().equals("blank") && newPassword.getText().equals(confirmNewPassword.getText())) {
+		if(oldPassword.getText().equals("p") && newPassword.getText().equals(confirmNewPassword.getText())) {
 			Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
 		}
-		else if(oldPassword.getText().equals("blank") && !newPassword.getText().equals(confirmNewPassword.getText())) {
+		else if(oldPassword.getText().equals("p") && !newPassword.getText().equals(confirmNewPassword.getText())) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Passwords don't match!");
 			alert.setContentText("Please enter matching passwords.");
