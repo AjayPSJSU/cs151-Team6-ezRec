@@ -11,6 +11,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 
 public class CreateRecController implements Initializable {
 
@@ -38,7 +40,7 @@ public class CreateRecController implements Initializable {
 
 	ArrayList<String> semesters = new ArrayList<>(Arrays.asList("Fall", "Spring"));
 
-	ArrayList<String> otherCourses = new ArrayList<>(Arrays.asList("CS151 A", "CS122 A", "CS166 B+", "CS146 A-"));
+	ArrayList<String> otherCourses = new ArrayList<>(Arrays.asList("CS151", "CS122", "CS166", "CS146"));
 
 	ArrayList<String> personalChars = new ArrayList<>(Arrays.asList("Responsible", "Hard-working", "Creative"));
 
@@ -55,7 +57,12 @@ public class CreateRecController implements Initializable {
 		// Dropdown for other courses
 		for (String course : otherCourses) {
 			CheckBox checkBox = new CheckBox(course);
-			CustomMenuItem customMenuItem = new CustomMenuItem(checkBox);
+			TextField textField = new TextField();
+			textField.setPromptText("Enter grade");
+			textField.setStyle("-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;");
+			HBox hbox = new HBox(checkBox,textField);
+			hbox.setSpacing(10);
+			CustomMenuItem customMenuItem = new CustomMenuItem(hbox);
 			customMenuItem.setHideOnClick(false);
 			otherCoursesDrop.getItems().add(customMenuItem);
 		}
