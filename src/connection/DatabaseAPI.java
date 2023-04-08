@@ -287,10 +287,9 @@ public class DatabaseAPI {
 			String deleteString = "delete from Accounts";
 			statement = dataConnection.createStatement();	
 			statement.executeUpdate(deleteString);	
-			System.out.println(deleteString);
 			String insertString = "insert into Accounts values(\"" + newPassword + "\",0)";
 			statement.executeUpdate(insertString);	
-			System.out.println(insertString);
+
 			
 
 		} catch (ClassNotFoundException e) {
