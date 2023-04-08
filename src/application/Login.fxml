@@ -45,7 +45,7 @@
                   <Font name="Serif Regular" size="19.0" />
                </font>
             </TextField>
-            <Text fill="#250a46" layoutX="73.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-family: Serif;" text="Default password: blank" wrappingWidth="296.478515625">
+            <Text fill="#250a46" layoutX="73.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-family: Serif;" text="Default password: p" wrappingWidth="296.478515625">
                <font>
                   <Font size="25.0" />
                </font>

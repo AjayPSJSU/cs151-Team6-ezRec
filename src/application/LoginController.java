@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+import connection.DatabaseAPI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,7 @@ public class LoginController {
 	private TextField password;
 
 	public void handleLogin(ActionEvent event) throws IOException {
-
+		DatabaseAPI database = new DatabaseAPI();
 		/* 
 		 * Checks if the user entered the default password for first time login
 		 */
@@ -32,7 +33,7 @@ public class LoginController {
 		/*
 		 * This checks if the user password is the same in the database
 		 */
-		else if(password.getText().equals("dbPassword")) {
+		else if(password.getText().equals(database.getPassword())) {
 			Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Scene scene = new Scene(root);

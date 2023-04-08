@@ -1,10 +1,13 @@
 package connection;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import application.Letter;
 
 public class DatabaseAPI {
 	
@@ -231,6 +234,48 @@ public class DatabaseAPI {
 		}
 
 		return temp.get(0);
+		
+	}
+	
+	public void saveForm(Letter letter) {
+		Connection dataConnection = null;
+		PreparedStatement  statement = null;
+		try {
+			
+			dataConnection = ConnectDatabase.connect();
+			String queryString = "insert into Letter(FirstName, LastName, academic, personal, program, grade, course, semester, year, date) VALUES(?,?,?,?,?,?,?,?,?,?)";
+			statement = dataConnection.prepareStatement(queryString);	
+			
+			statement.setString(1, letter.getFirstName());
+			statement.setString(2, letter.getLastName());
+			statement.setString(3, letter.getAcademic());
+			statement.setString(4, letter.getPersonal());
+			statement.setString(5, letter.getProgram());
+			statement.setString(6, letter.getGrade());
+			statement.setString(7, letter.getCourse());
+			statement.setString(8, letter.getSemester());
+			statement.setString(9, letter.getYear());
+			statement.setString(10, letter.getDate());
+			
+			statement.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				statement.close();
+				dataConnection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+		
 		
 	}
 
