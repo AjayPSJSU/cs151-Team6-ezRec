@@ -229,9 +229,76 @@ public class DatabaseAPI {
 			}
 
 		}
-
-		return temp.get(0);
+		String out = temp.size() > 0 ? temp.get(0) : "p";
+		return out;
 		
+	}
+	public void setPassword(String newPassword) {
+		Connection dataConnection = null;
+		Statement statement = null;
+		try {
+			
+			dataConnection = ConnectDatabase.connect();
+			String deleteString = "delete from Accounts";
+			statement = dataConnection.createStatement();	
+			statement.executeUpdate(deleteString);	
+			System.out.println(deleteString);
+			String insertString = "insert into Accounts values(\"" + newPassword + "\",0)";
+			statement.executeUpdate(insertString);	
+			System.out.println(insertString);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				statement.close();
+				dataConnection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	}
+	public boolean checkPassword(String input) {
+		String correctPw = getPassword();
+		return input.equals(correctPw);
+	}
+	public boolean isFirstTime() {
+		Connection dataConnection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		ArrayList<String> temp = null;
+		try {
+			
+			dataConnection = ConnectDatabase.connect();
+			String queryString = "select * from Accounts";
+			statement = dataConnection.createStatement();		
+			resultSet =  statement.executeQuery(queryString);			
+			temp = helper(resultSet, "Accounts");
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				statement.close();
+				resultSet.close();
+				dataConnection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		return temp.size() == 0;
 	}
 
 }
