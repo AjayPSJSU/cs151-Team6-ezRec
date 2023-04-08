@@ -23,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+
 public class CreateRecController implements Initializable {
 	@FXML
 	TextField firstName;
