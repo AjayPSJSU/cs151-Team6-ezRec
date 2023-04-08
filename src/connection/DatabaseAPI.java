@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import application.Faculty;
 import application.Letter;
 
 public class DatabaseAPI {
@@ -347,5 +348,183 @@ public class DatabaseAPI {
 		return temp.size() == 0;
 
 	}
+	
+	public void addSemester(String semester) {
+		Connection dataConnection = null;
+		PreparedStatement  statement = null;
+		try {
+			
+			dataConnection = ConnectDatabase.connect();
+			String queryString = "insert into Semesters(semesters) VALUES(?)";
+			statement = dataConnection.prepareStatement(queryString);		
+			statement.setString(1, semester);			
+			statement.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				statement.close();
+				dataConnection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	}
+		public void addCourses(String course) {
+			Connection dataConnection = null;
+			PreparedStatement  statement = null;
+			try {
+				
+				dataConnection = ConnectDatabase.connect();
+				String queryString = "insert into Courses(course) VALUES(?)";
+				statement = dataConnection.prepareStatement(queryString);		
+				statement.setString(1, course);			
+				statement.executeUpdate();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				try {
+					statement.close();
+					dataConnection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		}
+		
+		public void addPrograms(String program) {
+			Connection dataConnection = null;
+			PreparedStatement  statement = null;
+			try {
+				
+				dataConnection = ConnectDatabase.connect();
+				String queryString = "insert into Programs(name) VALUES(?)";
+				statement = dataConnection.prepareStatement(queryString);		
+				statement.setString(1, program);			
+				statement.executeUpdate();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				try {
+					statement.close();
+					dataConnection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		}
+		public void addPersonal(String personal) {
+			Connection dataConnection = null;
+			PreparedStatement  statement = null;
+			try {
+				
+				dataConnection = ConnectDatabase.connect();
+				String queryString = "insert into Pcharacteristics(characteristics) VALUES(?)";
+				statement = dataConnection.prepareStatement(queryString);		
+				statement.setString(1, personal);			
+				statement.executeUpdate();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				try {
+					statement.close();
+					dataConnection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		}
+		
+		public void addAcademic(String academic) {
+			Connection dataConnection = null;
+			PreparedStatement  statement = null;
+			try {
+				
+				dataConnection = ConnectDatabase.connect();
+				String queryString = "insert into Acharacteristics(characteristics) VALUES(?)";
+				statement = dataConnection.prepareStatement(queryString);		
+				statement.setString(1, academic);			
+				statement.executeUpdate();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				try {
+					statement.close();
+					dataConnection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		}
+		
+		public void addFaculty(Faculty faculty) {
+			Connection dataConnection = null;
+			PreparedStatement  statement = null;
+			try {
+				
+				dataConnection = ConnectDatabase.connect();
+				String queryString = "insert into Faculty(name, title, school, department, email, phone) VALUES(?,?,?,?,?,?)";
+				statement = dataConnection.prepareStatement(queryString);	
+				
+				statement.setString(1, faculty.getName());
+				statement.setString(2, faculty.getTitle());
+				statement.setString(3, faculty.getSchool());
+				statement.setString(4, faculty.getDepartment());
+				statement.setString(5, faculty.getEmail());
+				statement.setString(6, faculty.getPhone());
+
+				
+				statement.executeUpdate();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				try {
+					statement.close();
+					dataConnection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		}
 
 }
