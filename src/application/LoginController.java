@@ -22,7 +22,7 @@ public class LoginController {
 		/* 
 		 * Checks if the user entered the default password for first time login
 		 */
-		if (password.getText().equals("blank")) {
+		if (password.getText().equals("p")) {
 			Parent root = FXMLLoader.load(getClass().getResource("ResetPassword.fxml"));
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Scene scene = new Scene(root);
@@ -40,8 +40,8 @@ public class LoginController {
 			stage.show();
 		}
 	
-
 	}
+	
 	public void clickReset(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("ResetPassword.fxml"));
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -49,7 +49,5 @@ public class LoginController {
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-	
 
 }
