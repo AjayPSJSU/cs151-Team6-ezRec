@@ -27,7 +27,7 @@ public class HomepageController {
 	  * If you want to use this code to connect it with the db data
 	  */
 	 ArrayList<String> students = new ArrayList<>(
-	            Arrays.asList("Timothy Phan 2024", "Ibrahim Dobashi 2024","Timothy Nguyen 2023", "Ibrahim Smith 2025")
+	            Arrays.asList()
 	    );
 	
 	 
