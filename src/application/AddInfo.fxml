@@ -53,7 +53,7 @@
                   <Font name="Serif Regular" size="13.0" />
                </font>
             </Label>
-            <Button layoutX="303.0" layoutY="886.0" mnemonicParsing="false" onAction="#handleSubmit" prefHeight="37.0" prefWidth="85.0" style="-fx-background-color: #378ba8;" text="Submit" textFill="WHITE">
+            <Button layoutX="303.0" layoutY="844.0" mnemonicParsing="false" onAction="#handleSubmit" prefHeight="37.0" prefWidth="85.0" style="-fx-background-color: #378ba8;" text="Submit" textFill="WHITE">
                <font>
                   <Font name="Serif Regular" size="19.0" />
                </font>
@@ -98,6 +98,11 @@
             <TextField fx:id="academicChar" layoutX="138.0" layoutY="706.0" />
             <Button layoutX="289.0" layoutY="706.0" mnemonicParsing="false" onAction="#academicAdd" text="Add" />
             <Button layoutX="403.0" layoutY="763.0" mnemonicParsing="false" onAction="#academicRemove" prefHeight="37.0" prefWidth="59.0" text="Remove" />
+            <Button layoutX="303.0" layoutY="896.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="37.0" prefWidth="85.0" style="-fx-background-color: #378ba8;" text="Cancel" textFill="WHITE">
+               <font>
+                  <Font name="Serif Regular" size="19.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </center>

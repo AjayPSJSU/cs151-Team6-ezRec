@@ -116,6 +116,13 @@ public class CreateRecController implements Initializable {
 		System.out.println(letter);
 	}
 	
+	public void cancelRec(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
 	
 	
 	private String getPersonal() {

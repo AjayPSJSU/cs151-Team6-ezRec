@@ -7,22 +7,23 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomepageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="815.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomepageController">
    <top>
       <AnchorPane prefHeight="59.0" prefWidth="600.0" style="-fx-background-color: #302c9e;" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="searchBar" layoutX="14.0" layoutY="12.0" prefHeight="25.0" prefWidth="183.0" promptText="Search" />
             <Button layoutX="418.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: #2d90d4;" text="Edit" textFill="WHITE" />
             <Button layoutX="474.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: #2d90d4;" text="Delete" textFill="#f2f2f2" />
-            <Button layoutX="547.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: #2d90d4;" text="Compile" textFill="#f2f2f2" />
+            <Button layoutX="540.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: #2d90d4;" text="Compile" textFill="#f2f2f2" />
             <Button fx:id="searchBtn" layoutX="204.0" layoutY="12.0" mnemonicParsing="false" onAction="#search" style="-fx-background-color: #4c98c9;" text="Search" textFill="#f2f2f2" />
             <Button layoutX="350.0" layoutY="13.0" mnemonicParsing="false" onAction="#create" style="-fx-background-color: #2d90d4;" text="Create" textFill="#f2f2f2" />
-            <Button fx:id="logoutBtn" alignment="TOP_LEFT" layoutX="626.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleLogout" prefWidth="60.0" style="-fx-background-color: #B1dfe8;" text="Logout" textFill="#063970">
+            <Button fx:id="logoutBtn" alignment="TOP_LEFT" layoutX="741.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleLogout" prefWidth="60.0" style="-fx-background-color: #B1dfe8;" text="Logout" textFill="#063970">
                <font>
                   <Font name="Serif Regular" size="12.0" />
                </font>
             </Button>
             <Button layoutX="274.0" layoutY="13.0" mnemonicParsing="false" onAction="#addInfo" style="-fx-background-color: #2d90d4;" text="Add Info" textFill="#f2f2f2" />
+            <Button layoutX="618.0" layoutY="13.0" mnemonicParsing="false" onAction="#changePassword" style="-fx-background-color: #2d90d4;" text="Change Password" textFill="#f2f2f2" />
          </children>
       </AnchorPane>
    </top>
