@@ -36,6 +36,7 @@ public class ResetPasswordController {
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
+			Faculty.setState(false);
 		}
 		else if(db.checkPassword(oldPassword.getText()) && !newPassword.getText().equals(confirmNewPassword.getText())) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -46,7 +47,13 @@ public class ResetPasswordController {
 	}
 	
 	public void cancel(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
+		Parent root = null;
+		
+		if (Faculty.isState()) 
+			root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
+		else 
+			root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+		
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);

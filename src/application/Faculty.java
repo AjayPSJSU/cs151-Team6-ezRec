@@ -7,8 +7,7 @@ public class Faculty {
 	String department;
 	String email;
 	String phone;
-	
-	
+	private static boolean state = false;
 	
 	
 	public Faculty(String name, String title, String school, String department, String email, String phone) {
@@ -58,4 +57,14 @@ public class Faculty {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+
+	public static boolean isState() {
+		return state;
+	}
+
+	public static void setState(boolean state) {
+		Faculty.state = state;
+	}
+	
 }

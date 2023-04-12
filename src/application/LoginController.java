@@ -43,6 +43,7 @@ public class LoginController {
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
+			Faculty.setState(true);
 		}
 		else if(password.getText().equals("dbPassword")) {
 			Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
@@ -50,6 +51,7 @@ public class LoginController {
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
+			Faculty.setState(true);
 		}
 		else {
 			Alert alert = new Alert(AlertType.ERROR);

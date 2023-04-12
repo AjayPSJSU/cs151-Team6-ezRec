@@ -65,6 +65,7 @@ public class HomepageController {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+		Faculty.setState(false);
 	}
 	
 	public void create(ActionEvent event) throws IOException {
