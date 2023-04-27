@@ -1,21 +1,28 @@
 package application;
 
+import java.util.ArrayList;
+
 public class Letter {
 	
 	private String firstName;
 	private String lastName;
-	private String academic;
-	private String personal;
+	private ArrayList<String> academic;
+	private ArrayList<String> personal;
 	private String program;
-	private String grade;
-	private String course;
+	private ArrayList<String> grade;
+	private ArrayList<String> course;
 	private String semester;
 	private String year;
 	private String date;
+	private String gender;
+	private String draft;
+	private String school;
+	private int id;
 	
 	
-	public Letter(String firstName, String lastName, String academic, String personal, String program, String grade,
-			String course, String semester, String year, String date) {
+	public Letter(String firstName, String lastName, ArrayList<String> academic, 
+			  ArrayList<String> personal, String program, ArrayList<String> grade,
+			  ArrayList<String> course, String semester, String year, String date, String gender, String school) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -27,6 +34,28 @@ public class Letter {
 		this.semester = semester;
 		this.year = year;
 		this.date = date;
+		this.gender = gender;
+		this.school = school;
+
+	}
+	
+	public Letter(String firstName, String lastName, ArrayList<String> academic, 
+				  ArrayList<String> personal, String program, ArrayList<String> grade,
+				  ArrayList<String> course, String semester, String year, String date, String gender, String draft, String school) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.academic = academic;
+		this.personal = personal;
+		this.program = program;
+		this.grade = grade;
+		this.course = course;
+		this.semester = semester;
+		this.year = year;
+		this.date = date;
+		this.gender = gender;
+		this.draft = draft;
+		this.school = school;
 	}
 
 	public String getFirstName() {
@@ -41,16 +70,16 @@ public class Letter {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getAcademic() {
+	public ArrayList<String> getAcademic() {
 		return academic;
 	}
-	public void setAcademic(String academic) {
+	public void setAcademic(ArrayList<String> academic) {
 		this.academic = academic;
 	}
-	public String getPersonal() {
+	public ArrayList<String> getPersonal() {
 		return personal;
 	}
-	public void setPersonal(String personal) {
+	public void setPersonal(ArrayList<String> personal) {
 		this.personal = personal;
 	}
 	public String getProgram() {
@@ -59,16 +88,16 @@ public class Letter {
 	public void setProgram(String program) {
 		this.program = program;
 	}
-	public String getGrade() {
+	public ArrayList<String> getGrade() {
 		return grade;
 	}
-	public void setGrade(String grade) {
+	public void setGrade(ArrayList<String> grade) {
 		this.grade = grade;
 	}
-	public String getCourse() {
+	public ArrayList<String> getCourse() {
 		return course;
 	}
-	public void setCourse(String course) {
+	public void setCourse(ArrayList<String> course) {
 		this.course = course;
 	}
 	public String getSemester() {
@@ -89,6 +118,41 @@ public class Letter {
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+	
+	
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getDraft() {
+		return draft;
+	}
+
+	public void setDraft(String draft) {
+		this.draft = draft;
+	}
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+
+	public String getSchool() {
+		return school;
+	}
+
+	public void setSchool(String school) {
+		this.school = school;
 	}
 	@Override
 	public String toString() {

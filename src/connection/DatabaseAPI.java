@@ -245,19 +245,28 @@ public class DatabaseAPI {
 		try {
 			
 			dataConnection = ConnectDatabase.connect();
-			String queryString = "insert into Letter(FirstName, LastName, academic, personal, program, grade, course, semester, year, date) VALUES(?,?,?,?,?,?,?,?,?,?)";
-			statement = dataConnection.prepareStatement(queryString);	
+			String queryString = "insert into Letter(FirstName, LastName, academic, personal, program, grade, course, semester, year, date, gender, draft, school) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			statement = dataConnection.prepareStatement(queryString);
+			
+			String acaString = letter.getAcademic().toString();
+			String perString = letter.getPersonal().toString();
+			String course = letter.getCourse().toString();
+			String grade = letter.getGrade().toString();
 			
 			statement.setString(1, letter.getFirstName());
 			statement.setString(2, letter.getLastName());
-			statement.setString(3, letter.getAcademic());
-			statement.setString(4, letter.getPersonal());
+			statement.setString(3, acaString.substring(1, acaString.length()-1));
+			statement.setString(4, perString.substring(1, perString.length()-1));
 			statement.setString(5, letter.getProgram());
-			statement.setString(6, letter.getGrade());
-			statement.setString(7, letter.getCourse());
+			statement.setString(6, grade.substring(1, grade.length()-1));
+			statement.setString(7, course.substring(1, course.length()-1));
 			statement.setString(8, letter.getSemester());
 			statement.setString(9, letter.getYear());
 			statement.setString(10, letter.getDate());
+			statement.setString(11, letter.getGender());
+			//add draft letter to database
+			statement.setString(12, "Some Draft");
+			statement.setString(13, letter.getSchool());
 			
 			statement.executeUpdate();
 		} catch (ClassNotFoundException e) {
