@@ -105,7 +105,7 @@ public class CreateRecController implements Initializable {
 	
 	public void save(ActionEvent event) throws IOException {
 		Letter letter = new Letter(firstName.getText(), lastName.getText(), getAcademic(), getPersonal(), 
-									programName.getValue(), getGrade(), getCourse(), firstSemester.getValue(), year.getText(), date.getValue().toString());
+				programName.getValue(), getGrade(), getCourse(), firstSemester.getValue(), year.getText(), date.getValue().toString(), gender.getValue(), school.getText());
 		
 		database.saveForm(letter);
 		Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
@@ -125,59 +125,59 @@ public class CreateRecController implements Initializable {
 	}
 	
 	
-	private String getPersonal() {
-		StringBuilder persoString = new StringBuilder();
+	private ArrayList<String> getPersonal() {
+		ArrayList<String> persoString = new ArrayList<>();
 		for (int i = 0; i < personalCharDrop.getItems().size(); i++) {
 			CustomMenuItem tempCustomMenuItem = (CustomMenuItem) personalCharDrop.getItems().get(i);
 			CheckBox checkBox = (CheckBox) tempCustomMenuItem.getContent();
-			if (checkBox.isSelected()) persoString.append(checkBox.getText() + ", ");
+			if (checkBox.isSelected()) persoString.add(checkBox.getText());
 			
 		}
 		
-		return persoString.substring(0, persoString.length() - 2);
+		return persoString;
 		
 	}
 	
 	
-	private String getAcademic() {
-		StringBuilder persoString = new StringBuilder();
+	private ArrayList<String> getAcademic() {
+		ArrayList<String> persoString = new ArrayList<>();
 		for (int i = 0; i < academicCharDrop.getItems().size(); i++) {
 			CustomMenuItem tempCustomMenuItem = (CustomMenuItem) academicCharDrop.getItems().get(i);
 			CheckBox checkBox = (CheckBox) tempCustomMenuItem.getContent();
-			if (checkBox.isSelected()) persoString.append(checkBox.getText() + ", ");
+			if (checkBox.isSelected()) persoString.add(checkBox.getText());
 
 		}
 		
-		return persoString.substring(0, persoString.length() - 2);
+		return persoString;
 		
 	}
 	
-	private String getCourse() {
-		StringBuilder persoString = new StringBuilder();
+	private ArrayList<String> getCourse() {
+		ArrayList<String> persoString = new ArrayList<>();
 		for (int i = 0; i < otherCoursesDrop.getItems().size(); i++) {
 			CustomMenuItem tempCustomMenuItem = (CustomMenuItem) otherCoursesDrop.getItems().get(i);
 			HBox hbox = (HBox) tempCustomMenuItem.getContent();
 			CheckBox checkBox = (CheckBox) hbox.getChildren().get(0);
-			if (checkBox.isSelected()) persoString.append(checkBox.getText() + ", ");
+			if (checkBox.isSelected()) persoString.add(checkBox.getText());
 
 		}
 		
-		return persoString.substring(0, persoString.length() - 2);
+		return persoString;
 		
 	}
 	
-	private String getGrade() {
-		StringBuilder persoString = new StringBuilder();
+	private ArrayList<String> getGrade() {
+		ArrayList<String> persoString = new ArrayList<>();
 		for (int i = 0; i < otherCoursesDrop.getItems().size(); i++) {
 			CustomMenuItem tempCustomMenuItem = (CustomMenuItem) otherCoursesDrop.getItems().get(i);
 			HBox hbox = (HBox) tempCustomMenuItem.getContent();
 			CheckBox checkBox = (CheckBox) hbox.getChildren().get(0);
 			TextField gradeField = (TextField) hbox.getChildren().get(1);
-			if (checkBox.isSelected()) persoString.append(gradeField.getText() + ", ");
+			if (checkBox.isSelected()) persoString.add(gradeField.getText());
 
 		}
 		
-		return persoString.substring(0, persoString.length() - 2);
+		return persoString;
 		
 	}
 	
