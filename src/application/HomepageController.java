@@ -1,62 +1,107 @@
 package application;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+
+import connection.DatabaseAPI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
 public class HomepageController {
 	@FXML
-	private ListView<String> dropDown;
+	private ListView<Letter> dropDown;
 	
 	@FXML
 	private TextField searchBar;
 	
 	
 	
-	/*
-	  * If you want to use this code to connect it with the db data
-	  */
-	 ArrayList<String> students = new ArrayList<>(
-	            Arrays.asList()
-	    );
 	
 	 
-	public void search(ActionEvent event) {
-		 dropDown.getItems().clear();
-	     dropDown.getItems().addAll(searchList(searchBar.getText(),students));
+	public void search() {
+		DatabaseAPI db = new DatabaseAPI();
+		ArrayList<Letter> letters = db.searchLetter(searchList());
+		dropDown.getItems().addAll(letters);
+		
+	}
+	public void delete() {
+		
+		DatabaseAPI db = new DatabaseAPI();
+		int index = dropDown.getSelectionModel().getSelectedIndex();
+		if (index != -1) {
+			Letter let = dropDown.getItems().get(index);
+			dropDown.getItems().remove(index);
+			db.removeLetter(let);
+		}
+
+		
+	}
+	public void edit(ActionEvent event) throws IOException {
+		
+		int index = dropDown.getSelectionModel().getSelectedIndex();
+		
+		if (index != -1) {
+			Letter letter = dropDown.getItems().get(index);
+			StateDraftForm.setOldLetter(letter);
+			Parent root = FXMLLoader.load(getClass().getResource("CreateRec.fxml"));
+			autoFillOutForm(root, letter);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		}
 	}
 	
-	private List<String> searchList(String searchWords, List<String> listOfStrings) {
+	private void autoFillOutForm(Parent root, Letter letter) {
+		
+		BorderPane pane = null;
+		if (root instanceof BorderPane) 
+			pane = (BorderPane)root;
+		Pane p = (Pane) pane.getChildren().get(0);
+		for (int i = 0; i < p.getChildren().size(); i++) {
+			Node e = p.getChildren().get(i);
+			System.out.println(e.getId());
+			if (e.getId() == null) continue;
+			else if (e.getId().equals("firstName")) ((TextField)e).setText(letter.getFirstName());
+			else if (e.getId().equals("lastName")) ((TextField)e).setText(letter.getLastName());	
+			else if (e.getId().equals("lastName")) ((TextField)e).setText(letter.getLastName());	
+			else if (e.getId().equals("year")) ((TextField)e).setText(letter.getYear());
+			else if (e.getId().equals("school")) ((TextField)e).setText(letter.getSchool());
+			else if (e.getId().equals("date")) ((DatePicker)e).setValue(LocalDate.parse(letter.getDate()));
+			else if (e.getId().equals("gender")) ((ChoiceBox<String>)e).getSelectionModel().select(letter.getGender());
+			else if (e.getId().equals("programName")) ((ChoiceBox<String>)e).getSelectionModel().select(letter.getProgram());
+			else if (e.getId().equals("firstSemester")) ((ChoiceBox<String>)e).getSelectionModel().select(letter.getSemester());
+		}
+		
+	}
+	
+	private String searchList() {
 
 	    // Split the search string into individual words and create a list of them.
-	    List<String> searchWordsArray = Arrays.asList(searchWords.trim().split(" "));
+	    List<String> searchWordsArray = Arrays.asList(searchBar.getText().trim().split(" "));
+	    String str = "";
+	    for (int i = 0; i < searchWordsArray.size(); i++) 
+			str = str + "'" + searchWordsArray.get(i) + "', ";
+		
 
-	    // Filter the list of strings based on whether they contain all the words in the search string.
-	    List<String> filteredStrings = new ArrayList<>();
-	    for (String input : listOfStrings) {
-	        boolean allWordsFound = true;
-	        for (String word : searchWordsArray) {
-	            if (!input.toLowerCase().contains(word.toLowerCase())) {
-	                allWordsFound = false;
-	                break;
-	            }
-	        }
-	        if (allWordsFound) {
-	            filteredStrings.add(input);
-	        }
-	    }
+	    
 
-	    return filteredStrings;
+	    return str.substring(0, str.length() - 2);
 	}
 	
 	public void handleLogout(ActionEvent event) throws IOException {

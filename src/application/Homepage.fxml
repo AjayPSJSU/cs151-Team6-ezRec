@@ -12,8 +12,8 @@
       <AnchorPane prefHeight="59.0" prefWidth="600.0" style="-fx-background-color: #302c9e;" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="searchBar" layoutX="14.0" layoutY="12.0" prefHeight="25.0" prefWidth="183.0" promptText="Search" />
-            <Button layoutX="418.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: #2d90d4;" text="Edit" textFill="WHITE" />
-            <Button layoutX="474.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: #2d90d4;" text="Delete" textFill="#f2f2f2" />
+            <Button layoutX="418.0" layoutY="13.0" mnemonicParsing="false" onAction="#edit" style="-fx-background-color: #2d90d4;" text="Edit" textFill="WHITE" />
+            <Button layoutX="474.0" layoutY="12.0" mnemonicParsing="false" onAction="#delete" style="-fx-background-color: #2d90d4;" text="Delete" textFill="#f2f2f2" />
             <Button layoutX="540.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: #2d90d4;" text="Compile" textFill="#f2f2f2" />
             <Button fx:id="searchBtn" layoutX="204.0" layoutY="12.0" mnemonicParsing="false" onAction="#search" style="-fx-background-color: #4c98c9;" text="Search" textFill="#f2f2f2" />
             <Button layoutX="350.0" layoutY="13.0" mnemonicParsing="false" onAction="#create" style="-fx-background-color: #2d90d4;" text="Create" textFill="#f2f2f2" />

@@ -3,9 +3,12 @@ package connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.RowId;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import application.Faculty;
 import application.Letter;
@@ -245,19 +248,27 @@ public class DatabaseAPI {
 		try {
 			
 			dataConnection = ConnectDatabase.connect();
-			String queryString = "insert into Letter(FirstName, LastName, academic, personal, program, grade, course, semester, year, date) VALUES(?,?,?,?,?,?,?,?,?,?)";
-			statement = dataConnection.prepareStatement(queryString);	
+			String queryString = "insert into Letter(FirstName, LastName, academic, personal, program, grade, course, semester, year, date, gender, draft, school) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			statement = dataConnection.prepareStatement(queryString);
+			
+			String acaString = letter.getAcademic().toString();
+			String perString = letter.getPersonal().toString();
+			String course = letter.getCourse().toString();
+			String grade = letter.getGrade().toString();
 			
 			statement.setString(1, letter.getFirstName());
 			statement.setString(2, letter.getLastName());
-			statement.setString(3, letter.getAcademic());
-			statement.setString(4, letter.getPersonal());
+			statement.setString(3, acaString.substring(1, acaString.length()-1));
+			statement.setString(4, perString.substring(1, perString.length()-1));
 			statement.setString(5, letter.getProgram());
-			statement.setString(6, letter.getGrade());
-			statement.setString(7, letter.getCourse());
+			statement.setString(6, grade.substring(1, grade.length()-1));
+			statement.setString(7, course.substring(1, course.length()-1));
 			statement.setString(8, letter.getSemester());
 			statement.setString(9, letter.getYear());
 			statement.setString(10, letter.getDate());
+			statement.setString(11, letter.getGender());
+			statement.setString(12, letter.completeDraft());
+			statement.setString(13, letter.getSchool());
 			
 			statement.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -507,6 +518,117 @@ public class DatabaseAPI {
 				statement.setString(6, faculty.getPhone());
 
 				
+				statement.executeUpdate();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				try {
+					statement.close();
+					dataConnection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		}
+		public Faculty getFaculty() {
+			Connection dataConnection = null;
+			Statement statement = null;
+			ResultSet resultSet = null;
+			Faculty faculty = null;
+			try {
+				
+				dataConnection = ConnectDatabase.connect();
+				String queryString = "select * from Faculty";
+				statement = dataConnection.createStatement();		
+				resultSet =  statement.executeQuery(queryString);			
+				faculty = new Faculty(resultSet.getString("name"), resultSet.getString("title"), 
+											  resultSet.getString("school"), resultSet.getString("department"), 
+											  resultSet.getString("email"), resultSet.getString("phone"));
+				
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				try {
+					statement.close();
+					resultSet.close();
+					dataConnection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		
+			return faculty;
+			
+		}
+		public ArrayList<Letter> searchLetter(String str) {
+			Connection dataConnection = null;
+			Statement statement = null;
+			ResultSet resultSet = null;
+		
+			ArrayList<Letter> letters = new ArrayList<>();
+			try {
+				
+				dataConnection = ConnectDatabase.connect();
+				String queryString = "SELECT * FROM Letter WHERE FirstName IN (" + str + ") OR LastName IN (" + str + ") OR year IN (" +  str + ")";
+				statement = dataConnection.createStatement();		
+				resultSet =  statement.executeQuery(queryString);			
+				while(resultSet.next()) {
+					ArrayList<String> academic = new ArrayList<String>( Arrays.asList(resultSet.getString("academic").trim().split(", ")));
+					ArrayList<String> personal = new ArrayList<String>(  Arrays.asList(resultSet.getString("personal").trim().split(", ")));
+					ArrayList<String> course = new ArrayList<String>( Arrays.asList(resultSet.getString("course").trim().split(", ")));
+					ArrayList<String> grade = new ArrayList<String>(  Arrays.asList(resultSet.getString("grade").trim().split(", ")));
+					
+					Letter l = new Letter(resultSet.getString("FirstName"), resultSet.getString("LastName"), academic, personal, 
+										  resultSet.getString("program"), grade, course, resultSet.getString("semester"), 
+										  resultSet.getString("year"), resultSet.getString("date"), resultSet.getString("gender"), resultSet.getString("draft"), resultSet.getString("school"));
+				
+					l.setId(resultSet.getInt("Letter_id"));
+					
+					letters.add(l);
+				}
+				
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				try {
+					statement.close();
+					resultSet.close();
+					dataConnection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		
+			return letters;
+			
+		}
+		public void removeLetter(Letter letter) {
+			Connection dataConnection = null;
+			PreparedStatement  statement = null;
+			try {
+				
+				dataConnection = ConnectDatabase.connect();
+				String queryString = "DELETE FROM Letter WHERE rowid = " + letter.getId();
+				statement = dataConnection.prepareStatement(queryString);		
+						
 				statement.executeUpdate();
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block

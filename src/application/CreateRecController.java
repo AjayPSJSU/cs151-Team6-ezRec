@@ -19,7 +19,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -103,20 +105,27 @@ public class CreateRecController implements Initializable {
 	}
 
 	
-	public void save(ActionEvent event) throws IOException {
-		Letter letter = new Letter(firstName.getText(), lastName.getText(), getAcademic(), getPersonal(), 
-									programName.getValue(), getGrade(), getCourse(), firstSemester.getValue(), year.getText(), date.getValue().toString());
+	public void compile(ActionEvent event) throws IOException {
 		
-		database.saveForm(letter);
-		Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
+		Letter letter = new Letter(firstName.getText(), lastName.getText(), getAcademic(), getPersonal(), 
+				programName.getValue(), getGrade(), getCourse(), firstSemester.getValue(), year.getText(), date.getValue().toString(), gender.getValue(), school.getText());
+		
+		StateDraftForm.setLetter(letter);
+		AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DraftRe.fxml"));
+		TextArea t = (TextArea) root.getChildren().get(0);
+		t.setWrapText(true);
+		t.setText(letter.completeDraft());
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Scene scene = new Scene(root);
+		StateDraftForm.setScene(((Node) event.getSource()).getScene());
 		stage.setScene(scene);
 		stage.show();
+		
 		System.out.println(letter);
 	}
 	
 	public void cancelRec(ActionEvent event) throws IOException {
+		StateDraftForm.setOldLetter(null);
 		Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Scene scene = new Scene(root);
@@ -125,59 +134,59 @@ public class CreateRecController implements Initializable {
 	}
 	
 	
-	private String getPersonal() {
-		StringBuilder persoString = new StringBuilder();
+	private ArrayList<String> getPersonal() {
+		ArrayList<String> persoString = new ArrayList<>();
 		for (int i = 0; i < personalCharDrop.getItems().size(); i++) {
 			CustomMenuItem tempCustomMenuItem = (CustomMenuItem) personalCharDrop.getItems().get(i);
 			CheckBox checkBox = (CheckBox) tempCustomMenuItem.getContent();
-			if (checkBox.isSelected()) persoString.append(checkBox.getText() + ", ");
+			if (checkBox.isSelected()) persoString.add(checkBox.getText());
 			
 		}
 		
-		return persoString.substring(0, persoString.length() - 2);
+		return persoString;
 		
 	}
 	
 	
-	private String getAcademic() {
-		StringBuilder persoString = new StringBuilder();
+	private ArrayList<String> getAcademic() {
+		ArrayList<String> persoString = new ArrayList<>();
 		for (int i = 0; i < academicCharDrop.getItems().size(); i++) {
 			CustomMenuItem tempCustomMenuItem = (CustomMenuItem) academicCharDrop.getItems().get(i);
 			CheckBox checkBox = (CheckBox) tempCustomMenuItem.getContent();
-			if (checkBox.isSelected()) persoString.append(checkBox.getText() + ", ");
+			if (checkBox.isSelected()) persoString.add(checkBox.getText());
 
 		}
 		
-		return persoString.substring(0, persoString.length() - 2);
+		return persoString;
 		
 	}
 	
-	private String getCourse() {
-		StringBuilder persoString = new StringBuilder();
+	private ArrayList<String> getCourse() {
+		ArrayList<String> persoString = new ArrayList<>();
 		for (int i = 0; i < otherCoursesDrop.getItems().size(); i++) {
 			CustomMenuItem tempCustomMenuItem = (CustomMenuItem) otherCoursesDrop.getItems().get(i);
 			HBox hbox = (HBox) tempCustomMenuItem.getContent();
 			CheckBox checkBox = (CheckBox) hbox.getChildren().get(0);
-			if (checkBox.isSelected()) persoString.append(checkBox.getText() + ", ");
+			if (checkBox.isSelected()) persoString.add(checkBox.getText());
 
 		}
 		
-		return persoString.substring(0, persoString.length() - 2);
+		return persoString;
 		
 	}
 	
-	private String getGrade() {
-		StringBuilder persoString = new StringBuilder();
+	private ArrayList<String> getGrade() {
+		ArrayList<String> persoString = new ArrayList<>();
 		for (int i = 0; i < otherCoursesDrop.getItems().size(); i++) {
 			CustomMenuItem tempCustomMenuItem = (CustomMenuItem) otherCoursesDrop.getItems().get(i);
 			HBox hbox = (HBox) tempCustomMenuItem.getContent();
 			CheckBox checkBox = (CheckBox) hbox.getChildren().get(0);
 			TextField gradeField = (TextField) hbox.getChildren().get(1);
-			if (checkBox.isSelected()) persoString.append(gradeField.getText() + ", ");
+			if (checkBox.isSelected()) persoString.add(gradeField.getText());
 
 		}
 		
-		return persoString.substring(0, persoString.length() - 2);
+		return persoString;
 		
 	}
 	
