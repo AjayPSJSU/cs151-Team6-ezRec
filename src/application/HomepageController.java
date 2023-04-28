@@ -35,6 +35,9 @@ public class HomepageController {
 	public void search() {
 		DatabaseAPI db = new DatabaseAPI();
 		ArrayList<Letter> letters = db.searchLetter(searchList());
+		if (dropDown.getItems().size() > 0) 
+			dropDown.getItems().clear();
+		
 		dropDown.getItems().addAll(letters);
 		
 	}
