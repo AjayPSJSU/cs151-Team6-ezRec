@@ -156,9 +156,7 @@ public class Letter {
 	}
 	@Override
 	public String toString() {
-		return "Letter [firstName=" + firstName + "\n" + "lastName=" + lastName + "\n" + "academic=" + academic + "\n" + "personal="
-				+ personal + "\n" + "program=" + program + "\n" + "grade=" + grade + "\n" + "course=" + course + "\n" + "semester="
-				+ semester + "\n" + "year=" + year + "\n" + "date=" + date + "]";
+		return firstName + " " + lastName + " " + year;
 	}
 	
 	
