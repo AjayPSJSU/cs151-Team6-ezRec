@@ -29,10 +29,8 @@ public class HomepageController {
 	public void search(ActionEvent event) {
 		Letter letter = new Letter("dinh", "nguyen", null, null, null, null, null, null, "2023", null, null, null);
 		letter.setId(1);
-		Letter l = new Letter("john", "robert", null, null, null, null, null, null, "2022", null, null, null);
-		l.setId(2);
 		dropDown.getItems().add(letter);
-		dropDown.getItems().add(l);
+
 	}
 	
 	private List<String> searchList() {
