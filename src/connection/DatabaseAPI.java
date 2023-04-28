@@ -534,5 +534,32 @@ public class DatabaseAPI {
 
 			}
 		}
+		public void removeLetter(Letter letter) {
+			Connection dataConnection = null;
+			PreparedStatement  statement = null;
+			try {
+				
+				dataConnection = ConnectDatabase.connect();
+				String queryString = "DELETE FROM Letter WHERE rowid = " + letter.getId();
+				statement = dataConnection.prepareStatement(queryString);		
+						
+				statement.executeUpdate();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				try {
+					statement.close();
+					dataConnection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		}
 
 }
