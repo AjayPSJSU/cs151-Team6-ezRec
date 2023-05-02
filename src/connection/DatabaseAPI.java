@@ -267,7 +267,7 @@ public class DatabaseAPI {
 			statement.setString(9, letter.getYear());
 			statement.setString(10, letter.getDate());
 			statement.setString(11, letter.getGender());
-			statement.setString(12, letter.completeDraft());
+			statement.setString(12, letter.getDraft());
 			statement.setString(13, letter.getSchool());
 			
 			statement.executeUpdate();

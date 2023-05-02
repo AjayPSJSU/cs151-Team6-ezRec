@@ -28,6 +28,9 @@ public class DraftController {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+		StateDraftForm.setLetter(null);
+		StateDraftForm.setScene(null);
+		StateDraftForm.setOldLetter(null);
 	}
 	
 	public void cancel(ActionEvent event) {

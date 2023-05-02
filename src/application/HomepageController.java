@@ -61,7 +61,6 @@ public class HomepageController {
 			Letter letter = dropDown.getItems().get(index);
 			StateDraftForm.setOldLetter(letter);
 			Parent root = FXMLLoader.load(getClass().getResource("CreateRec.fxml"));
-			autoFillOutForm(root, letter);
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
@@ -69,28 +68,6 @@ public class HomepageController {
 		}
 	}
 	
-	private void autoFillOutForm(Parent root, Letter letter) {
-		
-		BorderPane pane = null;
-		if (root instanceof BorderPane) 
-			pane = (BorderPane)root;
-		Pane p = (Pane) pane.getChildren().get(0);
-		for (int i = 0; i < p.getChildren().size(); i++) {
-			Node e = p.getChildren().get(i);
-			System.out.println(e.getId());
-			if (e.getId() == null) continue;
-			else if (e.getId().equals("firstName")) ((TextField)e).setText(letter.getFirstName());
-			else if (e.getId().equals("lastName")) ((TextField)e).setText(letter.getLastName());	
-			else if (e.getId().equals("lastName")) ((TextField)e).setText(letter.getLastName());	
-			else if (e.getId().equals("year")) ((TextField)e).setText(letter.getYear());
-			else if (e.getId().equals("school")) ((TextField)e).setText(letter.getSchool());
-			else if (e.getId().equals("date")) ((DatePicker)e).setValue(LocalDate.parse(letter.getDate()));
-			else if (e.getId().equals("gender")) ((ChoiceBox<String>)e).getSelectionModel().select(letter.getGender());
-			else if (e.getId().equals("programName")) ((ChoiceBox<String>)e).getSelectionModel().select(letter.getProgram());
-			else if (e.getId().equals("firstSemester")) ((ChoiceBox<String>)e).getSelectionModel().select(letter.getSemester());
-		}
-		
-	}
 
 	private String searchList() {
 
@@ -99,10 +76,6 @@ public class HomepageController {
 	    String str = "";
 	    for (int i = 0; i < searchWordsArray.size(); i++) 
 			str = str + "'" + searchWordsArray.get(i) + "', ";
-		
-
-	    
-
 	    return str.substring(0, str.length() - 2);
 	}
 	

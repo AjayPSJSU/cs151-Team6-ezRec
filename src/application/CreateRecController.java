@@ -111,10 +111,11 @@ public class CreateRecController implements Initializable {
 				programName.getValue(), getGrade(), getCourse(), firstSemester.getValue(), year.getText(), date.getValue().toString(), gender.getValue(), school.getText());
 		
 		StateDraftForm.setLetter(letter);
+		letter.setDraft(letter.completeDraft());
 		AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DraftRe.fxml"));
 		TextArea t = (TextArea) root.getChildren().get(0);
 		t.setWrapText(true);
-		t.setText(letter.completeDraft());
+		t.setText(letter.getDraft());
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Scene scene = new Scene(root);
 		StateDraftForm.setScene(((Node) event.getSource()).getScene());
@@ -125,6 +126,8 @@ public class CreateRecController implements Initializable {
 	}
 	
 	public void cancelRec(ActionEvent event) throws IOException {
+		StateDraftForm.setLetter(null);
+		StateDraftForm.setScene(null);
 		StateDraftForm.setOldLetter(null);
 		Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
