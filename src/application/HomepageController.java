@@ -91,7 +91,7 @@ public class HomepageController {
 		}
 		
 	}
-	
+
 	private String searchList() {
 
 	    // Split the search string into individual words and create a list of them.
