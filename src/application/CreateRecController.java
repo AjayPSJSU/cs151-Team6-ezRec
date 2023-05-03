@@ -106,34 +106,41 @@ public class CreateRecController implements Initializable {
 
 	
 	public void compile(ActionEvent event) throws IOException {
+		//delete letter in database if user pick edit
+		if (StateDraftForm.getOldLetter() != null) {
+			database.removeLetter(StateDraftForm.getOldLetter());
+			StateDraftForm.setOldLetter(null);
+		}
 		
 		Letter letter = new Letter(firstName.getText(), lastName.getText(), getAcademic(), getPersonal(), 
 				programName.getValue(), getGrade(), getCourse(), firstSemester.getValue(), year.getText(), date.getValue().toString(), gender.getValue(), school.getText());
-		
-		StateDraftForm.setLetter(letter);
+			
 		letter.setDraft(letter.completeDraft());
-		AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DraftRe.fxml"));
-		TextArea t = (TextArea) root.getChildren().get(0);
-		t.setWrapText(true);
-		t.setText(letter.getDraft());
+		
+		//save Letter to database
+		database.saveForm(letter);
+		
+		//return to homepage
+		Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Scene scene = new Scene(root);
-		StateDraftForm.setScene(((Node) event.getSource()).getScene());
 		stage.setScene(scene);
 		stage.show();
+		
+		
 		
 		System.out.println(letter);
 	}
 	
 	public void cancelRec(ActionEvent event) throws IOException {
-		StateDraftForm.setLetter(null);
-		StateDraftForm.setScene(null);
+
 		StateDraftForm.setOldLetter(null);
 		Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+		
 	}
 	
 	
