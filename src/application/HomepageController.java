@@ -1,10 +1,9 @@
 package application;
+
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import connection.DatabaseAPI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,12 +11,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -28,6 +26,8 @@ public class HomepageController {
 	@FXML
 	private TextField searchBar;
 	
+	@FXML
+	private TextArea letterShow;
 	
 	
 	
@@ -77,6 +77,14 @@ public class HomepageController {
 	    for (int i = 0; i < searchWordsArray.size(); i++) 
 			str = str + "'" + searchWordsArray.get(i) + "', ";
 	    return str.substring(0, str.length() - 2);
+	}
+	public void click() {
+		int index = dropDown.getSelectionModel().getSelectedIndex();
+		if (index != -1) {
+			Letter letter = dropDown.getItems().get(index);
+			letterShow.setText(letter.getDraft());
+
+		}
 	}
 	
 	public void handleLogout(ActionEvent event) throws IOException {

@@ -179,7 +179,7 @@ public class Letter {
 		for (int i = 0; i < academic.size(); i++) tempString = tempString + academic.get(i) + ", ";
 		result.append(tempString.substring(0, tempString.length() - 2) + "\n\n");
 		
-		String tempStr = genString + " was always ";
+		String tempStr = genString + " was always";
 		for (int i = 0; i < personal.size(); i++) tempStr = tempStr + personal.get(i) + ", ";
 		result.append(tempStr.substring(0, tempStr.length() - 2) + "\n\n");
 		
