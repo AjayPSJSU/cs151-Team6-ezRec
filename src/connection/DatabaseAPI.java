@@ -3,9 +3,12 @@ package connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.RowId;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import application.Faculty;
 import application.Letter;
@@ -264,8 +267,8 @@ public class DatabaseAPI {
 			statement.setString(9, letter.getYear());
 			statement.setString(10, letter.getDate());
 			statement.setString(11, letter.getGender());
-			//add draft letter to database
-			statement.setString(12, "Some Draft");
+
+			statement.setString(12, letter.getDraft());
 			statement.setString(13, letter.getSchool());
 			
 			statement.executeUpdate();
@@ -534,6 +537,92 @@ public class DatabaseAPI {
 
 			}
 		}
+
+		public Faculty getFaculty() {
+			Connection dataConnection = null;
+			Statement statement = null;
+			ResultSet resultSet = null;
+			Faculty faculty = null;
+			try {
+				
+				dataConnection = ConnectDatabase.connect();
+				String queryString = "select * from Faculty";
+				statement = dataConnection.createStatement();		
+				resultSet =  statement.executeQuery(queryString);			
+				faculty = new Faculty(resultSet.getString("name"), resultSet.getString("title"), 
+											  resultSet.getString("school"), resultSet.getString("department"), 
+											  resultSet.getString("email"), resultSet.getString("phone"));
+				
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				try {
+					statement.close();
+					resultSet.close();
+					dataConnection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		
+			return faculty;
+			
+		}
+		public ArrayList<Letter> searchLetter(String str) {
+			Connection dataConnection = null;
+			Statement statement = null;
+			ResultSet resultSet = null;
+		
+			ArrayList<Letter> letters = new ArrayList<>();
+			try {
+				
+				dataConnection = ConnectDatabase.connect();
+				String queryString = "SELECT * FROM Letter WHERE FirstName IN (" + str + ") OR LastName IN (" + str + ") OR year IN (" +  str + ")";
+				statement = dataConnection.createStatement();		
+				resultSet =  statement.executeQuery(queryString);			
+				while(resultSet.next()) {
+					ArrayList<String> academic = new ArrayList<String>( Arrays.asList(resultSet.getString("academic").trim().split(", ")));
+					ArrayList<String> personal = new ArrayList<String>(  Arrays.asList(resultSet.getString("personal").trim().split(", ")));
+					ArrayList<String> course = new ArrayList<String>( Arrays.asList(resultSet.getString("course").trim().split(", ")));
+					ArrayList<String> grade = new ArrayList<String>(  Arrays.asList(resultSet.getString("grade").trim().split(", ")));
+					
+					Letter l = new Letter(resultSet.getString("FirstName"), resultSet.getString("LastName"), academic, personal, 
+										  resultSet.getString("program"), grade, course, resultSet.getString("semester"), 
+										  resultSet.getString("year"), resultSet.getString("date"), resultSet.getString("gender"), resultSet.getString("draft"), resultSet.getString("school"));
+				
+					l.setId(resultSet.getInt("Letter_id"));
+					
+					letters.add(l);
+				}
+				
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				try {
+					statement.close();
+					resultSet.close();
+					dataConnection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		
+			return letters;
+			
+		}
+
 		public void removeLetter(Letter letter) {
 			Connection dataConnection = null;
 			PreparedStatement  statement = null;

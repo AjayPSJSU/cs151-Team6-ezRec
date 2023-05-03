@@ -19,7 +19,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -103,25 +105,43 @@ public class CreateRecController implements Initializable {
 	}
 
 	
-	public void save(ActionEvent event) throws IOException {
+
+	public void compile(ActionEvent event) throws IOException {
+		//delete letter in database if user pick edit
+		if (StateDraftForm.getOldLetter() != null) {
+			database.removeLetter(StateDraftForm.getOldLetter());
+			StateDraftForm.setOldLetter(null);
+		}
+		
 		Letter letter = new Letter(firstName.getText(), lastName.getText(), getAcademic(), getPersonal(), 
 				programName.getValue(), getGrade(), getCourse(), firstSemester.getValue(), year.getText(), date.getValue().toString(), gender.getValue(), school.getText());
+			
+		letter.setDraft(letter.completeDraft());
 		
+		//save Letter to database
 		database.saveForm(letter);
+		
+		//return to homepage
 		Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+		
+		
+		
 		System.out.println(letter);
 	}
 	
 	public void cancelRec(ActionEvent event) throws IOException {
+
+		StateDraftForm.setOldLetter(null);
 		Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+		
 	}
 	
 	
