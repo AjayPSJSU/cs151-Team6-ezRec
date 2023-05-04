@@ -94,9 +94,6 @@ public class HomepageController {
 		}
 	}
 	
-	public void edit() {
-		
-	}
 	public void handleLogout(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
