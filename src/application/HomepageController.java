@@ -49,9 +49,16 @@ public class HomepageController {
 			dropDown.getItems().remove(index);
 			db.removeLetter(let);
 		}
+		letterShow.setText("");
 
 		
 	}
+	
+	public void compile() {
+		Letter letter = dropDown.getItems().get(0);
+		letterShow.setText(letter.completeDraft());
+	}
+	
 	public void edit(ActionEvent event) throws IOException {
 		
 		int index = dropDown.getSelectionModel().getSelectedIndex();
