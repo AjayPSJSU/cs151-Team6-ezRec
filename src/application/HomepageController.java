@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+
 import connection.DatabaseAPI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,9 +13,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 
@@ -44,13 +49,15 @@ public class HomepageController {
 		
 		DatabaseAPI db = new DatabaseAPI();
 		int index = dropDown.getSelectionModel().getSelectedIndex();
-		if (index != -1) {
+		if (index == -1) return;
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.isPresent() && result.get() == ButtonType.OK) {
 			Letter let = dropDown.getItems().get(index);
 			dropDown.getItems().remove(index);
 			db.removeLetter(let);
 		}
-		letterShow.setText("");
-
+		
 		
 	}
 	

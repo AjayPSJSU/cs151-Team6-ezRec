@@ -39,6 +39,6 @@
       <ListView fx:id="dropDown" onMouseClicked="#click" prefHeight="331.0" prefWidth="200.0" style="-fx-background-color: #B1dfe8;" BorderPane.alignment="CENTER" />
    </left>
    <center>
-      <TextArea fx:id="letterShow" editable="true" prefHeight="200.0" prefWidth="200.0" wrapText="true" BorderPane.alignment="CENTER" Text="bruh"/>
+      <TextArea fx:id="letterShow" Text="bruh" editable="true" prefHeight="200.0" prefWidth="200.0" text=" " wrapText="true" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
