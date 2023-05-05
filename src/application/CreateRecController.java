@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -19,9 +20,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -102,16 +101,55 @@ public class CreateRecController implements Initializable {
 			customMenuItem.setHideOnClick(false);
 			academicCharDrop.getItems().add(customMenuItem);
 		}
+		if (StateDraftForm.getOldLetter() != null)  AutoFill();
+			
+		
 	}
 
+	private void AutoFill() {
+		Letter letter = StateDraftForm.getOldLetter();
+		if (letter == null)  return;
+		
+		firstName.setText(letter.getFirstName()); 
+		lastName.setText(letter.getLastName());
+		date.setValue(LocalDate.parse(letter.getDate()));
+		year.setText(letter.getYear());
+		school.setText(letter.getSchool());
+		gender.getSelectionModel().select(letter.getGender());
+		programName.getSelectionModel().select(letter.getProgram());
+		firstSemester.getSelectionModel().select(letter.getSemester());
+		
+		for (int i = 0; i < otherCoursesDrop.getItems().size(); i++) {
+			CustomMenuItem tempCustomMenuItem = (CustomMenuItem) otherCoursesDrop.getItems().get(i);
+			HBox hbox = (HBox) tempCustomMenuItem.getContent();
+			CheckBox checkBox = (CheckBox) hbox.getChildren().get(0);
+			TextField gradeField = (TextField) hbox.getChildren().get(1);
+			int index = letter.getCourse().indexOf(checkBox.getText());
+			if (index != -1) {
+				checkBox.setSelected(true);
+				gradeField.setText(letter.getGrade().get(index));
+				
+			}
+
+		}
+		
+		for (int i = 0; i < personalCharDrop.getItems().size(); i++) {
+			CustomMenuItem tempCustomMenuItem = (CustomMenuItem) personalCharDrop.getItems().get(i);
+			CheckBox checkBox = (CheckBox) tempCustomMenuItem.getContent();
+			if (letter.getPersonal().contains(checkBox.getText()))checkBox.setSelected(true); 
+		}
+		for (int i = 0; i < academicCharDrop.getItems().size(); i++) {
+			CustomMenuItem tempCustomMenuItem = (CustomMenuItem) academicCharDrop.getItems().get(i);
+			CheckBox checkBox = (CheckBox) tempCustomMenuItem.getContent();
+			if (letter.getAcademic().contains(checkBox.getText()))checkBox.setSelected(true); 
+		}
+		
+	}
 	
 
 	public void compile(ActionEvent event) throws IOException {
 		//delete letter in database if user pick edit
-		if (StateDraftForm.getOldLetter() != null) {
-			database.removeLetter(StateDraftForm.getOldLetter());
-			StateDraftForm.setOldLetter(null);
-		}
+
 		
 		Letter letter = new Letter(firstName.getText(), lastName.getText(), getAcademic(), getPersonal(), 
 				programName.getValue(), getGrade(), getCourse(), firstSemester.getValue(), year.getText(), date.getValue().toString(), gender.getValue(), school.getText());
@@ -120,6 +158,10 @@ public class CreateRecController implements Initializable {
 		
 		//save Letter to database
 		database.saveForm(letter);
+		if (StateDraftForm.getOldLetter() != null) {
+			database.removeLetter(StateDraftForm.getOldLetter());
+			
+		}
 		
 		//return to homepage
 		Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
@@ -129,7 +171,7 @@ public class CreateRecController implements Initializable {
 		stage.show();
 		
 		
-		
+		StateDraftForm.setOldLetter(null);
 		System.out.println(letter);
 	}
 	
