@@ -57,7 +57,7 @@ public class HomepageController {
 			dropDown.getItems().remove(index);
 			db.removeLetter(let);
 		}
-		
+		letterShow.setText("");
 		
 	}
 	
